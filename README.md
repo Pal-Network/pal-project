@@ -190,7 +190,7 @@ Pal is an open-source project and welcomes contributors of all experience levels
 
 For questions, discussions, and coordination:
 
-👉 **Telegram (Contributors):** [PalNetwork](https://t.me/palnetwork)
+👉 **Telegram (Contributors):** ([PalNetwork](https://t.me/+zHoLOF7SrKU3Nzk0))
 
 ---
 
