@@ -1,0 +1,28 @@
+{
+  "name": "@pal/api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "lint": "eslint . --ext .ts",
+    "clean": "rm -rf dist",
+    "fund:testnet": "ts-node scripts/fund-testnet-wallet.ts"
+  },
+  "dependencies": {
+    "@stellar/stellar-sdk": "^12.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "envalid": "^7.3.1",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.12",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.4.5"
+  }
+}
