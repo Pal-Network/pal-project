@@ -1,6 +1,7 @@
 import "dotenv/config";
 import cors from "cors";
 import express from "express";
+import { env } from "./config/env";
 import { healthRouter } from "./routes/health";
 
 const app = express();
@@ -10,8 +11,6 @@ app.use(express.json());
 
 app.use("/api/v1", healthRouter);
 
-const port = Number(process.env.PORT ?? 8080);
-
-app.listen(port, () => {
-  console.log(`API listening on :${port}`);
+app.listen(env.PORT, () => {
+  console.log(`API listening on :${env.PORT}`);
 });
