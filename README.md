@@ -112,6 +112,21 @@ npm run dev
 
 ```
 
+## 🧱 Soroban Contracts (Escrow)
+
+Install the Soroban CLI and the Rust wasm target before building contracts:
+
+```bash
+cargo install soroban-cli
+rustup target add wasm32-unknown-unknown
+```
+
+Build contracts from the repo root:
+
+```bash
+npm run build:contracts
+```
+
 
 
 ##  Contributing
