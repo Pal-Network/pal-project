@@ -40,25 +40,24 @@ Pal uses the **Stellar Network** as its native payment layer to support micropay
 This project is structured as a monorepo to separate the frontend client and backend API while sharing UI components and configurations.
 
 ```text
-pal-network/
+pal-project/
 ├── apps/
 │   ├── web/              # Next.js frontend application
 │   └── api/              # Express backend application
 │       ├── src/
-│       │   ├── models/       # MongoDB schemas
-│       │   ├── controllers/  # Request handlers
+│       │   ├── models/       # MongoDB schemas (User, Match, Conversation, Opportunity)
 │       │   ├── routes/       # API routes
-│       │   ├── services/     # Business logic
-│       │   └── middlewares/  # Auth, validation, errors
+│       │   ├── services/     # GitHub OAuth + JWT helpers
+│       │   └── middlewares/  # Auth
+│       └── test/             # Jest setup + shared test factories
+├── contracts/            # Soroban escrow contract (Rust)
 ├── packages/
 │   ├── ui/               # Shared UI components
 │   └── config/           # Shared configs and constants
-├── docs/                 # Architecture and specifications
 ├── .env.example
 ├── CONTRIBUTING.md
 ├── CODE_OF_CONDUCT.md
 └── README.md
-
 ```
 
 ## 🗄️ API & Data Model (High-Level)
@@ -87,32 +86,42 @@ APIs follow standard REST conventions and are versioned for long-term stability.
 ```bash
 git clone https://github.com/Pal-Network/app.git
 cd app
-
 ```
-
 
 2. **Install dependencies:**
 ```bash
 npm install
-
 ```
 
-
-3. **Environment Setup:**
+3. **Environment setup:**
 ```bash
-cp .env.example .env
-
+cp .env.example apps/api/.env
+cp .env.example apps/web/.env.local
 ```
 
+Update `apps/api/.env` with your local MongoDB URI, a `JWT_SECRET`, and (if
+you're working on sign-in) GitHub OAuth app credentials — see
+[CONTRIBUTING.md](./CONTRIBUTING.md) for the full walkthrough.
 
-*Update the `.env` file with your local MongoDB URI and Stellar testnet credentials.*
 4. **Run the development servers:**
 ```bash
 npm run dev
+```
 
+The API runs on `:8080`, the web app on `:3000`.
+
+5. **Verify everything works:**
+```bash
+npm run lint
+npm run build
+npm run test
 ```
 
 ## 🧱 Soroban Contracts (Escrow)
+
+The `contracts/` workspace holds a minimal escrow contract (`PalEscrow`) used to
+hold a Stellar token from a depositor until it's released to a beneficiary or
+refunded. It exposes `create`, `release`, `refund`, and `get_escrow`.
 
 Install the Soroban CLI and the Rust wasm target before building contracts:
 
@@ -127,7 +136,11 @@ Build contracts from the repo root:
 npm run build:contracts
 ```
 
+Run the contract's unit tests:
 
+```bash
+cargo test --manifest-path contracts/Cargo.toml
+```
 
 ##  Contributing
 
@@ -139,7 +152,7 @@ Pal is an open-source project and we enthusiastically welcome contributors of al
 4. Add tests or documentation where relevant.
 5. Open a Pull Request with a clear summary of your changes.
 
-Please review our [CONTRIBUTING.md](https://www.google.com/search?q=./CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](https://www.google.com/search?q=./CODE_OF_CONDUCT.md) for detailed guidelines.
+Please review our [CONTRIBUTING.md](./CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) for detailed guidelines.
 
 ## 💬 Community & Support
 
@@ -153,8 +166,4 @@ Building Pal is a collaborative effort. Join us to discuss architecture, pick up
 
 ## 📄 License
 
-This project is open-source and licensed under the **[MIT License](https://www.google.com/search?q=./LICENSE)**.
-
----
-
-Would you like me to help draft the `CONTRIBUTING.md` file next to establish clear guidelines for developers who want to jump into the frontend or backend?
+This project is open-source and licensed under the **[MIT License](./LICENSE)**.

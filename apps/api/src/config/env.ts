@@ -8,6 +8,7 @@ export const env = cleanEnv(process.env, {
   GITHUB_CALLBACK_URL: str({
     default: "http://localhost:8080/api/v1/auth/github/callback",
   }),
+  WEB_APP_URL: str({ default: "http://localhost:3000" }),
   JWT_SECRET: str(),
   STELLAR_HORIZON_URL: url(),
   STELLAR_FRIENDBOT_URL: url(),

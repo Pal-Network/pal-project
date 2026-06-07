@@ -1,20 +1,9 @@
 import request from "supertest";
 import { createApp } from "../app";
-import { UserModel } from "../models/User";
 import { signAuthToken } from "../services/token";
+import { createUser } from "../../test/factories/user";
 
 const app = createApp();
-
-async function createUser(overrides: Partial<Record<string, unknown>> = {}) {
-  return UserModel.create({
-    githubId: overrides.githubId ?? "1",
-    githubUsername: overrides.githubUsername ?? "octocat",
-    name: overrides.name ?? "Octo Cat",
-    techStack: overrides.techStack ?? ["typescript"],
-    intentStatus: overrides.intentStatus ?? "looking_for_mentor",
-    availability: overrides.availability ?? true,
-  });
-}
 
 describe("GET /api/v1/users/me", () => {
   it("returns 401 without a token", async () => {
