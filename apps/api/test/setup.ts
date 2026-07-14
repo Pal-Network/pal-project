@@ -10,6 +10,8 @@ process.env.STELLAR_FRIENDBOT_URL = "https://friendbot.stellar.org";
 
 import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
+import { ConversationModel } from "../src/models/Conversation";
+import { MatchModel } from "../src/models/Match";
 import { UserModel } from "../src/models/User";
 
 let mongod: MongoMemoryServer;
@@ -17,7 +19,11 @@ let mongod: MongoMemoryServer;
 beforeAll(async () => {
   mongod = await MongoMemoryServer.create();
   await mongoose.connect(mongod.getUri());
-  await UserModel.init();
+  await Promise.all([
+    UserModel.init(),
+    MatchModel.init(),
+    ConversationModel.init(),
+  ]);
 });
 
 afterEach(async () => {

@@ -11,6 +11,7 @@ coverage/
 
 # contracts
 contracts/target/
+contracts/test_snapshots/
 
 # logs
 npm-debug.log*
