@@ -1,0 +1,18 @@
+node_modules/
+dist/
+.next/
+.turbo/
+*.tsbuildinfo
+coverage/
+
+# env
+.env
+.env.local
+
+# contracts
+contracts/target/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

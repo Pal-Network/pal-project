@@ -1,16 +1,19 @@
 import "dotenv/config";
-import cors from "cors";
-import express from "express";
+import { createApp } from "./app";
+import { connectDB } from "./config/db";
 import { env } from "./config/env";
-import { healthRouter } from "./routes/health";
 
-const app = express();
+async function start(): Promise<void> {
+  await connectDB();
 
-app.use(cors());
-app.use(express.json());
+  const app = createApp();
 
-app.use("/api/v1", healthRouter);
+  app.listen(env.PORT, () => {
+    console.log(`API listening on :${env.PORT}`);
+  });
+}
 
-app.listen(env.PORT, () => {
-  console.log(`API listening on :${env.PORT}`);
+start().catch((error) => {
+  console.error("Failed to start API", error);
+  process.exit(1);
 });

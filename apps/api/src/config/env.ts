@@ -5,6 +5,10 @@ export const env = cleanEnv(process.env, {
   MONGODB_URI: str(),
   GITHUB_CLIENT_ID: str(),
   GITHUB_CLIENT_SECRET: str(),
+  GITHUB_CALLBACK_URL: str({
+    default: "http://localhost:8080/api/v1/auth/github/callback",
+  }),
+  JWT_SECRET: str(),
   STELLAR_HORIZON_URL: url(),
-  STELLAR_FRIENDBOT_URL: url()
+  STELLAR_FRIENDBOT_URL: url(),
 });

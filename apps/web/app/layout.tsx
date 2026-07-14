@@ -3,11 +3,11 @@ import { env } from "../src/env";
 
 export const metadata = {
   title: "Pal Network",
-  description: "Pal Network Web Client"
+  description: "Pal Network Web Client",
 };
 
 export default function RootLayout({
-  children
+  children,
 }: {
   children: React.ReactNode;
 }) {
